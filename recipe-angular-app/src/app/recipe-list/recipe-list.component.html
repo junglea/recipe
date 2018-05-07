@@ -1,0 +1,36 @@
+<div class="container"  *ngIf="!selectedRecipe">
+    <div>
+      <label>
+        <input #recipeName (keyup.enter)="add(recipeName.value); recipeName.value=''" placeholder="Nouvelle recette" />
+      </label>
+      <!-- (click) passes input value to add() and then clears the input -->
+      <button (click)="add(recipeName.value); recipeName.value=''" class="btn text-hide btn-recipe-sm btn-recipe-add">Ajouter</button>
+    </div>
+    <div>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-action" *ngFor="let recipe of recipes" (click)="openDetailView(recipe)">
+          <div class="row">
+            <div class="col">
+              <h5>{{recipe.title}}</h5>
+            </div>
+            <div class="col">
+              <div class="btn-group" style="float: right;">
+                <button (click)="openEditView(recipe)" type="button" class="btn text-hide btn-recipe-sm btn-recipe-edit">Modifier</button>
+                <button (click)="delete(recipe)" type="button" class="btn text-hide btn-recipe-sm btn-recipe-del">Supprimer</button>
+              </div>
+  
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  
+<div *ngIf="selectedRecipe">
+  <app-recipe-detail 
+      [recipe]="selectedRecipe" 
+      (close)="closeDetailView()"
+      [editState]="editState"
+  ></app-recipe-detail>
+</div>

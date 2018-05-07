@@ -1,0 +1,250 @@
+<div class="container" *ngIf="!editState">
+  <!-- <div class="container">
+        <img src="data:image/JPEG;base64,{{recipe.photo}}">
+    </div>
+    <div class="container bg-dark">
+        <h2 class="bg-dark">{{ recipe.title }}</h2>
+        {{ recipe.nbPers }}
+        <h4 class="">Ingrédients</h4>
+        <ul class="list-unstyled">
+          <li *ngFor="let ingredient of recipe.ingredients;">{{ ingredient }}</li>
+        </ul>
+  
+    </div>
+   -->
+
+  <div class="row">
+    <div class="col-md-auto">
+      <button (click)="goList()" class="btn text-hide btn-recipe-sm btn-recipe-back">Retour à la liste</button>
+    </div>
+    <div class="col">
+      <h5>{{recipe.categ}}</h5>
+      <h2>{{ recipe.title }}</h2>
+    </div>
+    <div class="col-md-auto">
+      <div class="btn-group" style="float: right;">
+        <button (click)="edit(recipe)" type="button" class="btn text-hide btn-recipe-sm btn-recipe-edit">Modifier</button>
+        <!-- <button (click)="delete(recipe)" type="button" class="btn text-hide btn-recipe-sm btn-recipe-del">Supprimer</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 border">
+      <div class="container" *ngIf="recipe.photo">
+        <img src="data:image/JPEG;base64,{{recipe.photo}}" class="rounded img-detail">
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item title-list title-list-weight">Ingrédients</li>
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients;">{{ ingredient }}</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item title-list">
+          {{ recipe.nbPers }}
+
+          <span *ngIf="recipe.making">
+            <br>
+            <b>Préparation</b>: {{ recipe.making }}</span>
+          <span *ngIf="recipe.cooling">
+            <br>
+            <b>Réfrigération</b>: {{ recipe!.cooling }}</span>
+          <span *ngIf="recipe.baking">
+            <br>
+            <b>Cuisson</b>: {{ recipe.baking }}</span>
+        </li>
+        <li class="list-group-item" *ngFor="let step of recipe.steps; let i = index;">
+          <b>{{i+1}}.</b> {{ step }}</li>
+      </ul>
+      <div>
+        <span *ngIf="recipe.makeDiff">
+          <br>
+          <b>Le petit plus:</b>
+          {{recipe.makeDiff}}
+        </span>
+        <span *ngIf="recipe.toTest">
+          <br>
+          <b>A tester:</b>
+          {{recipe.toTest}}
+        </span>
+        <span *ngIf="recipe.foundOn">
+          <br>
+          <b>Source:</b>
+          {{recipe.foundOn}}
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--     
+
+  <div>
+    <h5>Le petit plus:</h5>
+    {{recipe.makeDiff}}
+    <h5>A tester:</h5>
+    {{recipe.toTest}}
+    <h5>Source:</h5>
+    {{recipe.foundOn}}
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <ul class="list-group">
+        <li class="list-group-item title-list title-list-weight">Ingrédients</li>
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients;">{{ ingredient }}</li>
+      </ul>
+    </div>
+    <div class="col-sm">
+      <ul class="list-group">
+        <li class="list-group-item title-list">
+          {{ recipe.nbPers }}
+          <br>
+          <b>Préparation</b>: {{ recipe.making }}
+          <br>
+          <b>Réfrigération</b>: {{ recipe.cooling }}
+          <br>
+          <b>Cuisson</b>: {{ recipe.baking }}
+        </li>
+        <li class="list-group-item" *ngFor="let step of recipe.steps; let i = index;">
+          <b>{{i+1}}.</b> {{ step }}</li>
+      </ul>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<!-- Form part -->
+
+<div class="container" *ngIf="editState">
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-md-auto">
+        <button (click)="goList()" class="btn text-hide btn-recipe-sm btn-recipe-back">Retour à la liste</button>
+      </div>
+      <div class="col">
+        <input class="form-control" formControlName="title">
+      </div>
+      <div class="col-md-auto">
+        <div class="btn-group" style="float: right;">
+          <button type="button" (click)="reset();ingredientName.value='';stepDesc.value=''" class="btn text-hide btn-recipe-sm btn-recipe-reset"
+            alt="Annuler">Annuler</button>
+          <button type="submit" class="btn text-hide btn-recipe-sm btn-recipe-save" alt="Sauvegarder">Sauvegarder</button>
+          <!-- <button (click)="delete(recipe)" type="button" class="btn text-hide btn-recipe-sm btn-recipe-del">Supprimer</button> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- <div>
+          <select>
+            <option *ngFor="let categ of categories">{{categ.name}}</option>
+          </select>
+        </div> -->
+    <div class="form-group">
+      <select class="form-control" id="power" required>
+        <option *ngFor="let categorie of categories">{{categorie}}</option>
+      </select>
+      <label>Le petit plus:</label>
+      <textarea class="form-control" formControlName="makeDiff" rows="3"></textarea>
+      <label>A tester:</label>
+      <textarea class="form-control" formControlName="toTest" rows="3"></textarea>
+      <label>Source:</label>
+      <textarea class="form-control" formControlName="foundOn" rows="1"></textarea>
+    </div>
+    <div class="form-group">
+ggg {{getPhoto()}}
+        <img src="data:image/JPEG;base64,getPhoto()" class="rounded img-mini">
+      <input #photo type="file" />
+    </div>
+
+    <div class="row">
+      <div class="col-sm" formArrayName="ingredients">
+        <ul class="list-group">
+          <li class="list-group-item title-list title-list-weight">Ingrédients</li>
+          <li class="list-group-item list-edit" *ngFor="let ingredient of ingredients.controls; let i = index">
+            <div class="input-group">
+              <input class="form-control list-input" formControlName="{{i}}">
+              <div class="input-group-append">
+                <button (click)="delIngredient(i)" type="button" class="btn text-hide btn-recipe-light btn-recipe-del">Supprimer</button>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item list-edit">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button (click)="addIngredient(ingredientName)" type="button" class="btn text-hide btn-recipe-light btn-recipe-add">Ajouter</button>
+              </div>
+              <input class="form-control list-input" #ingredientName (keyup.enter)="addIngredient(ingredientName)">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm">
+        <ul class="list-group">
+          <li class="list-group-item title-list">
+
+            <div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width:12em">Nombre de personnes</div>
+                </div>
+                <input class="form-control" formControlName="nbPers">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width:12em">Préparation</div>
+                </div>
+                <input class="form-control" formControlName="making">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width:12em">Cuisson</div>
+                </div>
+                <input class="form-control" formControlName="baking">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width:12em">Réfrigération</div>
+                </div>
+                <input class="form-control" formControlName="cooling">
+              </div>
+            </div>
+          </li>
+
+          <li formArrayName="steps" class="list-group-item list-edit" *ngFor="let step of steps.controls; let j=index">
+            <div class="input-group">
+              <textarea class="form-control list-input" formControlName="{{j}}" rows="3"></textarea>
+              <div class="input-group-append">
+                <button (click)="delStep(j)" type="button" class="btn text-hide btn-recipe-light btn-recipe-del">Supprimer</button>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item list-edit">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button (click)="addStep(stepDesc)" type="button" class="btn text-hide btn-recipe-light btn-recipe-add">Ajouter</button>
+              </div>
+              <textarea class="form-control list-input" #stepDesc rows="3"></textarea>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </form>
+</div>

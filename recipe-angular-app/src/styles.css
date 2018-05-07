@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+    font-size: 0.9rem;
+  }
+body {
+    /* background-image: url('./app/resources/background-1.jpg'); */
+    background-color: gainsboro;
+    /* font-size: 1em; */
+}
+
+#recipe{
+    background-color: white;
+    /* border: 1px #d1d1d1; */
+    /* border-style: solid; */
+    /* padding: 30px; */
+    /* max-width: 1024px; */
+    /* margin-top: 20px; */
+    
+}
+.navbar-recipe {
+    background-color:#199033;
+}
+
+.title-list {
+    font-family: Helvetica, sans-serif!important;
+    background-color: #eee;
+    color: #909090;
+}
+.title-list-weight {
+    font-family: Helvetica, sans-serif!important;
+    font-weight: bold;
+} 
+.list-edit {
+    padding: 0em;
+    margin: 0em;
+}
+.list-button {
+    width: 7em;
+    border: none;
+    border-left: #ddd 1px dashed;
+    color: #909090;
+}
+.list-input{
+    border: none;
+}
+
+.btn-recipe-edit {
+    background-image: url('./app/resources/pencil.svg');
+}
+.btn-recipe-del {
+    background-image: url('./app/resources/trashcan.svg');
+}
+.btn-recipe-add {
+    background-image: url('./app/resources/plus.svg');
+}
+.btn-recipe-back {
+    background-image: url('./app/resources/arrow-left.svg');
+}
+.btn-recipe-save {
+    background-image: url('./app/resources/check.svg');
+}
+.btn-recipe-reset {
+    background-image: url('./app/resources/x.svg');
+}
+.btn-recipe-search {
+    background-image: url('./app/resources/search.svg');
+    background-color:white;
+}
+.btn-recipe-sm{
+    background-repeat: no-repeat;
+    background-size: 20px;
+    width: 40px; 
+    height: 35px;
+    background-position:center center;
+    border: 1px #d1d1d1;
+    border-style: solid;
+}
+.btn-recipe-light{
+    background-repeat: no-repeat;
+    background-size: 20px;
+    width: 40px; 
+    height: 35px;
+    background-position:center center;
+    /* border: 1px #d1d1d1;
+    border-style: solid; */
+}
